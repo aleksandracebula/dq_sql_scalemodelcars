@@ -1,6 +1,4 @@
-The purpose of this project is to showcase my SQL skills. It was developed as part of a data science guided course on the Dataquest platform.
-
-Data available here: (link).
+/*The purpose of this project is to showcase my SQL skills. It was developed as part of a data science guided course on the Dataquest platform.
 
 I have analyzed data from a sales records database for scale model cars. My analysis have focused on the following key areas:
 
@@ -26,7 +24,7 @@ The database contains eight tables:
 A table below shows tables':
 - name,
 - number of attributes,
-- number of rows.
+- number of rows.*/
 
 -- database info --
 
@@ -84,14 +82,15 @@ SELECT 'Offices' AS table_name,
        COUNT(*) AS number_of_row
   FROM Offices;
 
-*******************************************
+/*******************************************
 STEP 2: EXPLORING PRODUCTS
 Which products should be ordered more of or less of?
 The goal was to create 3 tables:
 - low stock - indicates products in demand out of stock or almost out of stock; represents the quantity of the sum of each product ordered divided by the quantity of product in stock;
 - product performance - represents the sum of sales per product;
 - priority products for restocking - are those with high product performance that are on the brink of being out of stock.
-*******************************************
+*******************************************/
+
 -- low stock --
 SELECT SUM(od.quantityOrdered) AS quantityOrdered, 
        p.quantityInStock, 
@@ -104,7 +103,7 @@ SELECT SUM(od.quantityOrdered) AS quantityOrdered,
  ORDER BY lowStock DESC
  LIMIT 10;
 
-The table shows that with a total of 1015 of S24_2000 product ordered and only 15 units currently in stock, it has a low-stock ratio of 67.67. This indicates that the product is highly popular but severely understocked, leading to significant missed sales opportunities.
+/*The table shows that with a total of 1015 of S24_2000 product ordered and only 15 units currently in stock, it has a low-stock ratio of 67.67. This indicates that the product is highly popular but severely understocked, leading to significant missed sales opportunities.*/
 
 -- product performance --
 SELECT productCode, 
@@ -114,7 +113,7 @@ SELECT productCode,
  ORDER BY productPerformance DESC
  LIMIT 10;
 
-The table shows 10 products with best product performance.
+/*The table shows 10 products with best product performance.*/
 
 -- prority products for restocking --
 WITH
@@ -147,14 +146,14 @@ SELECT productCode, productName
  WHERE productCode IN (SELECT productCode 
                          FROM productToRestock);
 
-***********************************
+/***********************************
 STEP 3: EXPLORING CUSTOMER INFORMATION
 How should marketing and communication strategies be matched to customer behaviors?
 The idea was to include 5 top customers in customer reward program (CRP). In order to do that, I created 3 tables:
 - a table which shows profit each customer generates,
 - a table with top 5 customers by revenue (to include them in CRP),
 - a table with top 5 least-engaged customers by revenue.
-***********************************
+***********************************/
 
 -- revenue --
 SELECT o.customerNumber, 
@@ -216,13 +215,13 @@ SELECT c.contactLastName,
  ORDER BY revenue
  LIMIT 5;
 
-*******************
+/*******************
 STEP 4 SETTING AN OPTIMAL BUDGET FOR ACQUIRING NEW CUSTOMERS
 How much can be spent on acquiring new customers?
 The idea was to find:
 - a number of new customers arriving each month,
 - finding Customer Lifetime Value (LTV) which tells how much profit an average customer generates during their lifetime with the store
-*******************
+*******************/
 
 -- new customers arriving each month --
 WITH 
@@ -263,7 +262,7 @@ SELECT year_month,
 
 --The number of clients has been decreasing since 2003. In 2004, values were the lowest. The year 2005 is not presented in the table above althought it is present in the database. It means that the store has not had any new customers since September of 2004. It means it makes sense to spend money acquiring new customers.
 
-The year 2005, which is present in the database as well, isn't present in the table above, this means that the store has not had any new customers since September of 2004. This means it makes sense to spend money acquiring new customers.
+/*The year 2005, which is present in the database as well, isn't present in the table above, this means that the store has not had any new customers since September of 2004. This means it makes sense to spend money acquiring new customers.*/
 
 -- Customer LTV --
 WITH 
